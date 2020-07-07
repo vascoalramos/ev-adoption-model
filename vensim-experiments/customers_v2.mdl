@@ -1,0 +1,121 @@
+{UTF-8}
+Costumers= INTEG (
+	Customer Acquisition Rate,
+		0)
+	~	person
+	~		|
+
+Customer Acquisition Rate=
+	10
+	~	person/Month
+	~		|
+
+Hardware sales=
+	Customer Acquisition Rate*Hardware sales per new customer
+	~	$/Month
+	~		|
+
+Hardware sales per new customer=
+	1000
+	~	$/person
+	~		|
+
+Hardware share of sales=
+	Hardware sales/(Hardware sales+Service Sales)
+	~	Dmnl
+	~		|
+
+Service Sales=
+	Costumers*Service sales per existing customer
+	~	$/Month
+	~		|
+
+Service sales per existing customer=
+	100
+	~	$/person/Month
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 120
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.25
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Costumers,528,294,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,2,48,252,290,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(434,290)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(315,290)|
+11,5,0,375,290,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Customer Acquisition Rate,375,317,53,19,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,2163954,878,313,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Costumers,Graph
+10,8,Hardware sales,329,187,49,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,9,Service Sales,502,151,43,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,10,5,8,1,0,0,0,0,64,0,-1--1--1,,1|(321,245)|
+1,11,1,9,1,0,0,0,0,64,0,-1--1--1,,1|(564,216)|
+10,12,Hardware sales per new customer,143,163,62,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,13,Service sales per existing customer,574,65,55,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,14,13,9,0,0,0,0,0,64,0,-1--1--1,,1|(539,106)|
+1,15,12,8,0,0,0,0,0,64,0,-1--1--1,,1|(235,174)|
+10,16,Hardware share of sales,375,78,52,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,17,8,16,1,0,0,0,0,64,0,-1--1--1,,1|(322,136)|
+1,18,9,16,1,0,0,0,0,64,0,-1--1--1,,1|(480,102)|
+///---\\\
+:L<%^E!@
+1:HardwareShare.vdfx
+1:Base.vdfx
+1:Test.vdfx
+9:HardwareShare
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+4:Time
+5:Hardware sales per new customer
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:120
+26:120
+75:
+43:
