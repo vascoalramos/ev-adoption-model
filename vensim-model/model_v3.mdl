@@ -1,0 +1,348 @@
+{UTF-8}
+Rate of Adoption=
+	Total adopters from Driving Range + Adopters from ads + Total Adopters from Price + \
+		Total adopters from Recharge Infrastructure
+	 + Total adopters from Recharge Time + Adopters from Word of Mouth
+	~	Person
+	~		|
+
+Actual fixed costs difference = WITH LOOKUP (
+	Time,
+		([(0,0)-(20,10000)],(0,10000),(2.5,7500),(5,5750),(10,4500),(15,2900),(20,1900) ))
+	~	€
+	~		|
+
+Actual recharge time = WITH LOOKUP (
+	Time,
+		([(0,0)-(20,600)],(0,490),(5,400),(10,50),(20,0) ))
+	~	
+	~		|
+
+Actual variable costs difference = WITH LOOKUP (
+	Time,
+		([(0,-1000)-(20,1000)],(0,912),(13,0),(20,-707) ))
+	~	€
+	~		|
+
+Acutal recharge infrastructure density = WITH LOOKUP (
+	Time,
+		([(0,0)-(20,100)],(0,100),(2,60),(5,27),(10,10),(20,0) ))
+	~	
+	~		|
+
+Fixed costs difference effect = WITH LOOKUP (
+	Actual fixed costs difference,
+		([(-10000,0)-(10000,1)],(-10000,0.98),(-7000,0.95),(-6000,0.92),(-5400,0.89),(-3761\
+		,0.8246),(-2000,0.74),(-400,0.66),(-200,0.62),(0,0.33),(200,0.3),(400,0.29),(900,0.27\
+		),(1100,0.25),(1800,0.18),(2500,0.14),(3200,0.08),(4100,0.05),(5000,0.03),(10000,0)\
+		 ))
+	~	Dmnl
+	~		|
+
+Total adopters from Recharge Time=
+	factor recharge time * Adopters from Recharge time
+	~	Person
+	~		|
+
+Adopters from costs=
+	(Fixed costs difference effect + Variable costs difference effect) * Potential adopters per year
+	~	
+	~		|
+
+Variable costs difference effect = WITH LOOKUP (
+	Actual variable costs difference,
+		([(-5000,0)-(5000,1)],(-5000,1),(-3000,0.93),(-800,0.63),(100,0.12),(400,0.07),(2100\
+		,0.01),(5000,0) ))
+	~	€
+	~		|
+
+Adopters from recharge infrastructure=
+	Recharge infrastructure density effect * Potential adopters per year
+	~	Person
+	~		|
+
+Adopters from Recharge time=
+	Recharge time effect * Potential adopters per year
+	~	Person
+	~		|
+
+Adopters from Word of Mouth=
+	Total population / Contact rate * Adoption fraction
+	~	
+	~		|
+
+Adoption fraction=
+	0.01
+	~	
+	~		|
+
+Total adopters from Recharge Infrastructure=
+	factor recharge infrastructure * Adopters from recharge infrastructure
+	~	Person
+	~		|
+
+Recharge infrastructure density effect = WITH LOOKUP (
+	Acutal recharge infrastructure density,
+		([(0,0)-(100,1)],(0,1),(2,0.99),(10,0.92),(18.35,0.8289),(26.61,0.6798),(33.94,0.5658\
+		),(42.2,0.5088),(48.32,0.4561),(52.6,0.364),(57.19,0.2763),(64,0.24),(73.5,0.19),(91.3\
+		,0.125),(100,0) ))
+	~	Dmnl
+	~		|
+
+Contact rate=
+	Potential Adopters / Adopters
+	~	
+	~		|
+
+Total population=
+	1.028e+07
+	~	Person
+	~		|
+
+factor recharge time=
+	0.06
+	~	
+	~		|
+
+factor recharge infrastructure=
+	0.04
+	~	
+	~		|
+
+factor price difference=
+	0.6
+	~	
+	~		|
+
+Total Adopters from Price=
+	factor price difference * Adopters from costs
+	~	
+	~		|
+
+Recharge time effect = WITH LOOKUP (
+	Actual recharge time,
+		([(0,0)-(500,1)],(0,1),(5,0.93),(60,0.38),(85,0.23),(120,0.1),(160,0.06),(350,0.01)\
+		,(500,0) ))
+	~	
+	~		|
+
+Advertising effect=
+	0.00025
+	~	Dmnl
+	~		|
+
+Adopters from ads=
+	Advertising effect * Potential Adopters
+	~	Person
+	~		|
+
+Actual driving range = WITH LOOKUP (
+	Time,
+		([(0,0)-(20,600)],(0,150),(5,200),(10,300),(16,430),(20,600) ))
+	~	Km
+	~		|
+
+Adopters= INTEG (
+	Rate of Adoption-Discard Rate,
+		16000)
+	~	Person
+	~		|
+
+Adopters from Driving Range=
+	Driving range effect * Potential adopters per year
+	~	Person
+	~		|
+
+Average EV lifetime=
+	15
+	~	Year
+	~		|
+
+Discard Rate=
+	0.3 * Average EV lifetime
+	~	
+	~		|
+
+Driving range effect = WITH LOOKUP (
+	Actual driving range,
+		([(150,0)-(800,1)],(150,0.03),(200,0.05),(260,0.1),(440,0.42),(660,0.8),(800,0.95) \
+		))
+	~	Dmnl
+	~		|
+
+factor driving range=
+	0.3
+	~	Dmnl
+	~		|
+
+Potential Adopters= INTEG (
+	Discard Rate-Rate of Adoption,
+		8.5e+06)
+	~	Person
+	~		|
+
+Potential adopters per year=
+	200000
+	~	Person/Year
+	~		|
+
+Total adopters from Driving Range=
+	factor driving range * Adopters from Driving Range
+	~	Person
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 20
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Time,460,-425,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,2,Actual driving range,332,-364,44,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,3,1,2,0,0,0,0,0,64,0,-1--1--1,,1|(410,-401)|
+10,4,Driving range effect,205,-288,43,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,5,2,4,0,0,0,0,0,64,0,-1--1--1,,1|(274,-330)|
+10,6,Potential adopters per year,473,-297,58,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Adopters from Driving Range,223,-179,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,4,7,1,0,0,0,0,64,0,-1--1--1,,1|(174,-227)|
+1,9,6,7,1,0,0,0,0,64,0,-1--1--1,,1|(320,-248)|
+10,10,Potential Adopters,244,163,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,11,Adopters,796,155,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,12,14,11,4,0,0,22,0,0,0,-1--1--1,,1|(630,158)|
+1,13,14,10,100,0,0,22,0,0,0,-1--1--1,,1|(388,158)|
+11,14,816,498,158,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,15,Rate of Adoption,498,176,59,10,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,16,18,10,4,0,0,22,0,0,0,-1--1--1,,3|(242,49)|(242,54)|(242,98)|
+1,17,18,11,100,0,0,22,0,0,0,-1--1--1,,1|(796,49)|
+11,18,200,612,49,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,19,Discard Rate,612,68,42,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,20,Average EV lifetime,736,6,40,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,21,20,18,1,0,0,0,0,64,0,-1--1--1,,1|(656,18)|
+10,22,factor driving range,428,-216,42,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,23,Total adopters from Driving Range,374,-136,64,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,24,7,23,1,0,0,0,0,64,0,-1--1--1,,1|(279,-123)|
+1,25,22,23,1,0,0,0,0,64,0,-1--1--1,,1|(450,-163)|
+1,26,23,14,1,0,0,0,0,64,0,-1--1--1,,1|(450,-48)|
+10,27,Advertising effect,90,341,55,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,28,Adopters from ads,351,287,59,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,29,27,28,0,0,0,0,0,64,0,-1--1--1,,1|(213,315)|
+1,30,10,28,1,0,0,0,0,64,0,-1--1--1,,1|(249,239)|
+1,31,28,14,1,0,0,0,0,64,0,-1--1--1,,1|(432,229)|
+12,32,3409308,1037,81,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Adopters,Graph
+12,33,8127378,1366,79,150,150,3,44,0,0,2,0,0,0,0,0,0,0,0,0
+Rate of Adoption,Graph
+10,34,Actual fixed costs difference,661,-375,57,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,Fixed costs difference effect,728,-280,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,36,Adopters from costs,722,-188,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,Total Adopters from Price,584,-131,49,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,38,factor price difference,551,-213,37,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,39,1,34,0,0,0,0,0,64,0,-1--1--1,,1|(538,-406)|
+1,40,34,35,1,0,0,0,0,64,0,-1--1--1,,1|(730,-327)|
+1,41,35,36,1,0,0,0,0,64,0,-1--1--1,,1|(738,-229)|
+1,42,36,37,1,0,0,0,0,64,0,-1--1--1,,1|(689,-146)|
+1,43,38,37,1,0,0,0,0,64,0,-1--1--1,,1|(519,-167)|
+1,44,6,36,1,0,0,0,0,64,0,-1--1--1,,1|(627,-252)|
+1,45,37,14,1,0,0,0,0,64,0,-1--1--1,,1|(516,6)|
+10,46,Actual variable costs difference,872,-356,66,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,47,Variable costs difference effect,969,-226,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,48,1,46,1,0,0,0,0,64,0,-1--1--1,,1|(633,-425)|
+1,49,46,47,1,0,0,0,0,64,0,-1--1--1,,1|(942,-299)|
+1,50,47,36,1,0,0,0,0,64,0,-1--1--1,,1|(851,-194)|
+10,51,Time,514,849,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,52,Acutal recharge infrastructure density,275,804,66,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,53,51,52,1,0,0,0,0,64,0,-1--1--1,,1|(402,852)|
+10,54,Recharge infrastructure density effect,140,711,73,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,55,52,54,1,0,0,0,0,64,0,-1--1--1,,1|(197,777)|
+10,56,Potential adopters per year,498,742,62,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,57,Adopters from recharge infrastructure,114,563,71,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,58,54,57,1,0,0,0,0,64,0,-1--1--1,,1|(107,639)|
+1,59,56,57,1,0,0,0,0,64,0,-1--1--1,,1|(285,688)|
+10,60,factor recharge infrastructure,385,642,48,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,61,Total adopters from Recharge Infrastructure,315,537,73,32,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,62,57,61,1,0,0,0,0,64,0,-1--1--1,,1|(177,530)|
+1,63,60,61,1,0,0,0,0,64,0,-1--1--1,,1|(363,566)|
+1,64,61,14,1,0,0,0,0,64,0,-1--1--1,,1|(468,260)|
+10,65,Actual recharge time,777,797,50,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,66,51,65,1,0,0,0,0,64,0,-1--1--1,,1|(694,833)|
+10,67,Recharge time effect,837,701,46,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,68,65,67,1,0,0,0,0,64,0,-1--1--1,,1|(821,758)|
+10,69,Adopters from Recharge time,825,573,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,70,67,69,1,0,0,0,0,64,0,-1--1--1,,1|(855,643)|
+1,71,56,69,1,0,0,0,0,64,0,-1--1--1,,1|(755,652)|
+10,72,factor recharge time,558,644,48,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,73,Total adopters from Recharge Time,595,535,64,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,74,69,73,1,0,0,0,0,64,0,-1--1--1,,1|(721,542)|
+1,75,72,73,1,0,0,0,0,64,0,-1--1--1,,1|(542,585)|
+1,76,73,14,1,0,0,0,0,64,0,-1--1--1,,1|(500,251)|
+10,77,Adopters from Word of Mouth,718,332,51,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,78,Contact rate,938,321,40,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,79,Adoption fraction,893,402,55,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,80,Total population,841,442,51,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,81,Potential Adopters,1084,295,35,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+10,82,Adopters,1086,359,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128,0,0,0,0,0,0
+1,83,81,78,0,0,0,0,0,64,0,-1--1--1,,1|(1020,305)|
+1,84,82,78,0,0,0,0,0,64,0,-1--1--1,,1|(1018,341)|
+1,85,78,77,1,0,0,0,0,64,0,-1--1--1,,1|(846,347)|
+1,86,79,77,1,0,0,0,0,64,0,-1--1--1,,1|(793,382)|
+1,87,80,77,1,0,0,0,0,64,0,-1--1--1,,1|(745,393)|
+1,88,77,14,1,0,0,0,0,64,0,-1--1--1,,1|(527,241)|
+///---\\\
+:L<%^E!@
+1:old_values_model.vdfx
+1:dataset_v2.vdfx
+1:dataset_v1.vdfx
+9:old_values_model
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+4:Time
+5:Potential adopters per year
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:0
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:20
+26:20
+75:
+43:
