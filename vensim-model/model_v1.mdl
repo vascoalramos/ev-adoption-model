@@ -1,0 +1,152 @@
+{UTF-8}
+Actual driving range = WITH LOOKUP (
+	Time,
+		([(0,0)-(20,600)],(0,150),(5,200),(10,300),(16,430),(20,550) ))
+	~	Km
+	~		|
+
+Adopters= INTEG (
+	Rate of Adoption-Discard Rate,
+		0)
+	~	
+	~		|
+
+Adopters from Driving Range=
+	Driving range effect * Potential adopters per year
+	~	Person
+	~		|
+
+Average EV lifetime=
+	15
+	~	Year
+	~		|
+
+Discard Rate=
+	0.3 * Average EV lifetime
+	~	
+	~		|
+
+Driving range effect = WITH LOOKUP (
+	Actual driving range,
+		([(150,0)-(800,1)],(150,0.03),(200,0.05),(260,0.1),(440,0.42),(660,0.8),(800,0.95) \
+		))
+	~	Dmnl
+	~		|
+
+factor driving range=
+	0.24
+	~	Dmnl
+	~		|
+
+Potential Adopters= INTEG (
+	Discard Rate-Rate of Adoption,
+		6.5e+06)
+	~	
+	~		|
+
+Potential adopters per year=
+	40000
+	~	Person/Year
+	~		|
+
+Rate of Adoption=
+	Total adopters from Driving Range
+	~	
+	~		|
+
+Total adopters from Driving Range=
+	factor driving range * Adopters from Driving Range
+	~	Person
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 20
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Time,460,17,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|0||128-128-128,0,0,0,0,0,0
+10,2,Actual driving range,332,78,44,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,3,1,2,0,0,0,0,0,64,0,-1--1--1,,1|(410,40)|
+10,4,Driving range effect,205,154,43,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,5,2,4,0,0,0,0,0,64,0,-1--1--1,,1|(274,112)|
+10,6,Potential adopters per year,473,145,58,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Adopters from Driving Range,223,263,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,8,4,7,1,0,0,0,0,64,0,-1--1--1,,1|(174,215)|
+1,9,6,7,1,0,0,0,0,64,0,-1--1--1,,1|(320,194)|
+10,10,Potential Adopters,241,664,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,11,Adopters,716,655,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,13,15,11,4,0,0,22,0,0,0,-1--1--1,,1|(580,659)|
+1,14,15,10,100,0,0,22,0,0,0,-1--1--1,,1|(376,659)|
+11,15,0,478,659,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,16,Rate of Adoption,478,678,55,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,20,10,4,0,0,22,0,0,0,-1--1--1,,3|(239,547)|(239,555)|(239,599)|
+1,19,20,11,100,0,0,22,0,0,0,-1--1--1,,1|(716,547)|
+11,20,0,560,547,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,21,Discard Rate,560,566,42,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,22,Average EV lifetime,661,441,40,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,22,20,1,0,0,0,0,64,0,-1--1--1,,1|(494,495)|
+10,24,factor driving range,428,226,42,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,25,Total adopters from Driving Range,374,306,64,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,26,7,25,1,0,0,0,0,64,0,-1--1--1,,1|(279,319)|
+1,27,24,25,1,0,0,0,0,64,0,-1--1--1,,1|(450,279)|
+1,28,25,15,1,0,0,0,0,64,0,-1--1--1,,1|(447,453)|
+///---\\\
+:L<%^E!@
+1:dataset_v1.vdfx
+1:Current.vdfx
+1:Current
+9:dataset_v1
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+42:1
+72:0
+73:0
+4:Time
+5:Adopters
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:0
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:20
+26:20
+75:
+43:
