@@ -199,7 +199,7 @@ factor driving range=
 
 Potential Adopters= INTEG (
 	Discard Rate-Rate of Adoption,
-		8.5e+06)
+		6.5e+06)
 	~	Person
 	~		|
 
@@ -359,7 +359,7 @@ Rate of Adoption,Graph
 72:0
 73:0
 4:Time
-5:Potential adopters per year
+5:Potential Adopters
 35:Date
 36:YYYY-MM-DD
 37:2000
