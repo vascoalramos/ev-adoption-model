@@ -1,15 +1,13 @@
 \section{System Dynamics Model} \label{section:model}
-This chapter provide explanation and details regarding the developed model in Vensim. Before further scrutinize the implementation and for the sake of simplicity \textbf{some of the variable definitions are going to be presented as graphs}. This is because, as state before, \textbf{this study is mostly based on the results of surveys}, hence, the best way to define some of the variables is to use the resulting data form those surveys, instead of a pure mathematical definition.
+This chapter provide explanation and details regarding the developed model in Vensim. Before further scrutinize the implementation and for the sake of simplicity \textbf{some of the variable definitions are going to be presented as graphs}. This is because, as stated before, \textbf{this study is mostly based on the results of surveys}, hence, the best way to define some of the variables is to use the resulting data form those surveys, instead of a pure mathematical definition.
 
-In the \textbf{cases where the variables function were define through data}, this \textbf{data was based from \cite{thesis-base, pedro-report} and adapted to the Portuguese scenario and reality using external sources}, such as news articles \cite{dv-news-article, eco-news-article, obs-news-article, uve-news-article}.
-
-Finally to implement this types of variable functions, it was used the feature \textbf{Lookups} of Vensim, showcased in section \cite{vensim-youtube-lookups}.
+In the \textbf{cases where the variables function were define through data}, this \textbf{data was based from \cite{thesis-base, pedro-report} and adapted to the Portuguese scenario and reality using external sources}, such as news articles \cite{dv-news-article, eco-news-article, obs-news-article, uve-news-article}. Finally, to implement this types of variable functions, it was used the feature \textbf{Lookups} of Vensim, showcased in section \cite{vensim-youtube-lookups}.
 
 \subsection{Proposed System Dynamics Model}
-An can be seen in the figure \ref{fig:vensim-model}, the developed model takes into account all the factors discussed in \ref{section:factors}.
+An can be seen in the figure \ref{fig:vensim-model}, the developed model takes into account all the factors discussed in section \ref{section:factors}.
 
-\begin{figure}[htbp]
-\centerline{\includegraphics[width=1\linewidth]{img/vensim-model.jpg}}
+\begin{figure}[!htbp]
+\centerline{\includegraphics[width=0.74\linewidth]{img/vensim-model.jpg}}
 \caption{Complete Model of EV Adoption Process}
 \label{fig:vensim-model}
 \end{figure}
@@ -19,7 +17,7 @@ An can be seen in the figure \ref{fig:vensim-model}, the developed model takes i
 Before going into detail on each factor representation and associated relationships, let's first explore the adopted layout with \textbf{Potential Adopters $\rightarrow$ Actual Adopters} and \textbf{Discard Rate}.
 
 \subsubsection{Potential Adopters $\rightarrow$ Actual Adopters}
-This model starts with the potential adopters, which are the current passenger vehicle drivers and account for approximately 6.5 million Portuguese drivers. Taking the model into consideration we can clearly see that through the rate of adoption a fraction of these 6.5 million drivers will become adopters each ear, that is, will purchase an EV. The adopters variable has an initial value of 16 000 drivers, that represents the Portuguese drivers that already have an electric vehicle in 2020. 
+This model starts with the potential adopters, which are the current passenger vehicle drivers and account for approximately 6.5 million Portuguese drivers. Taking the model into consideration we can clearly see that through the rate of adoption, a fraction of these 6.5 million drivers will become adopters each ear, that is, will purchase an EV. The adopters variable has an initial value of 16 000 drivers, that represents the Portuguese drivers that already have an electric vehicle in 2020. 
 
 \subsubsection{Discard Rate}
 The bass diffusion model is frequently described as a \textit{first-purchase} model because it does not grasp the situation where the product is consumed, upgraded or discarded. What this means is that the bass diffusion model is not able to represent the inverse situation (Actual Adopters $\rightarrow$ Potential Adopters). The implemented model has the capability to capture that situation in the sense that an EV can, for instance be discarded or upgraded due to the battery lifetime or dissatisfaction. This event is modelled with the battery lifetime that has a value of 15 years. 
@@ -28,7 +26,7 @@ The bass diffusion model is frequently described as a \textit{first-purchase} mo
 The \textbf{variables} that are going to be \textbf{explored with more detail in the next sub-chapters are} the ones that were \textbf{based on data from the surveys}. It is going to be presented the graphs associated with each one of these variables and will also be explored its context beyond the number representation. All the remaining variables (that are simple mathematical functions or constants) are summarized in the table \ref{table:model-summary}, further ahead.
 
 \subsubsection{Driving Range}
-Given the current average capacity of the batteries on the market and the past years of evolution, figure \ref{fig:driving-range} describes the current average of EV's maximum range at 250km, at year 0 (2020), and an evolution to 300km after 5 years (2025), all the way to 675 at 2040. Obviously the further we predict, the less reliable are those predictions, so some of these number are, as said, just predictions and can be wrong, but are the best possible predictions given the data we have today.
+Given the current average capacity of the batteries on the market and the past years of evolution, figure \ref{fig:driving-range} describes the current average of EV's maximum range at 250km, at year 0 (2020), and an evolution to 300km after 5 years (2025), all the way to 675km at 2040. Obviously the further we predict, the less reliable are those predictions, so some of these number are, as said, just predictions and can be wrong, but are the best possible predictions given the data we have today.
 
 Figure \ref{fig:driving-range-effect} shows us the acceptance percentages of EVs maximum range according to the consumer's responses on the surveys. The graph shows us that, even today, the average driving range it's not very well accepted, since only 5\% - 10\% of the enquired customers would buy a vehicle with that range. The minimum driving range that has a certain degree of acceptance is 440km, so it can be expected that this factor could have a big positive impact on EV sales from 2030. Obviously this is not the only factor to consider as we will see further ahead that a good recharge infrastructure with high charging speeds could lessen the need for higher driving range values.
 
@@ -124,7 +122,7 @@ In figure \ref{fig:recharge-time-effect} we can see that more than 40\% of the e
 \end{figure}
 
 \subsubsection{Environmental Concern Effect}
-More and more people are concerned with future of our planet, so, this concern has an impact on EV sales. As can be seen in figure \ref{fig:env-concern}, at yearly stages this concern has a boost effect on sales around 5\%, this value starts to increase at fast pace in the next 12,5 years and then, as EVs become more and more common, its growth starts to slow down due to the loss of the novelty effect and the loss of the big disruption impact on people's lives and pollution percentages.
+More and more people are concerned with the future of our planet, so, this concern has an impact on EV sales. As can be seen in figure \ref{fig:env-concern}, at early stages this concern has a boost effect on sales around 5\%, this value starts to increase at fast pace in the next 12,5 years and then, as EVs become more and more common, its growth starts to slow down due to the loss of the novelty effect and the loss of the big disruption impact on people's lives and pollution percentages.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.45\linewidth]{img/env-concern-effect.png}}
