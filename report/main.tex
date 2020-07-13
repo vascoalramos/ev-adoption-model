@@ -1,0 +1,105 @@
+\documentclass{article}
+% Margin definition.
+\usepackage[a4paper,total={6.8in, 8.5in}]{geometry}
+% Images.
+\usepackage{graphicx}
+\usepackage[hidelinks, bookmarks=true]{hyperref}
+\usepackage{lmodern,babel,adjustbox,booktabs,siunitx}
+\usepackage{eurosym}
+\renewcommand{\arraystretch}{1.5}
+% Encoding.
+\usepackage[utf8]{inputenc}
+% Helvetic font.
+\usepackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault} 
+% Header for ua logo.
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+% Dots in index.
+\usepackage[titles]{tocloft}
+\usepackage{parskip}
+\renewcommand{\cftsubsecleader}{\Large\cftdotfill{0}}
+\renewcommand{\cftsecleader}{\Large\cftdotfill{0}}
+\renewcommand{\cftsecfont}{\large\bfseries\scshape}
+\renewcommand{\cftsubsecfont}{\scshape}
+\renewcommand*{\HyperDestNameFilter}[1]{\jobname-#1}
+% Dot after number in (sub)sections and in toc.
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+\usepackage[nottoc]{tocbibind}
+\usepackage[letterspace=45]{microtype}
+\usepackage[ddmmyyyy]{datetime}
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\autoref*{#1} \nameref*{#1}}}
+% Hedear with ua logo definition. 
+\pagestyle{fancy}
+\fancyhf{}
+\chead{
+    \includegraphics[width=5in]{./img/header_ua.png}
+}
+\setlength\headheight{45pt}
+% Footer with page number.
+\rfoot{Page \thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+% Rename table of contents title to "Index"
+\renewcommand{\contentsname}{\normalsize Index}
+% Water mark
+\newsavebox\mybox
+\usepackage[printwatermark]{xwatermark}
+\usepackage{makecell}
+\usepackage[table]{xcolor}
+\newwatermark[allpages,color=red!50,angle=45,scale=9,xpos=-30,ypos=30]{\usebox\mybox}
+
+\newenvironment{myindentpar}[1]%
+  {\begin{list}{}%
+          {\setlength{\leftmargin}{#1}}%
+          \item[]%
+  }
+  {\end{list}}
+
+
+\begin{document}
+\renewcommand{\abstractname}{\begin{flushleft}\large \lowercase{INTRODUCTORY} N\lowercase{OTE}:\end{flushleft}}
+
+\title{\vspace{-0.9cm}
+       \large\raggedright\textbf{\emph{Electric Vehicles adoption process from a consumer perspective: A System Dynamics Model}} \\ 
+       \vspace{1cm}
+       \normalsize
+       \raggedright\textbf{Author: \hspace{1.1cm} Vasco António Lopes Ramos} \\ \vspace{0.4cm}
+       \raggedright\textbf{Date: \hspace{1.45cm} \today} \\}
+\author{}
+\date{}
+
+
+\maketitle
+\thispagestyle{fancy}
+
+\vspace{-1.4cm}
+
+\tableofcontents
+
+\newpage
+
+\fontsize{10pt}{13pt}
+\selectfont
+\lsstyle
+
+\input{sections/introduction}
+
+\input{sections/abstract}
+
+\input{sections/previous-work}
+
+\input{sections/factors}
+
+\input{sections/model}
+
+\input{sections/results}
+
+\input{sections/conclusions}
+
+\bibliography{refs}
+\bibliographystyle{ieeetr}
+
+\end{document}
